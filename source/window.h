@@ -4,10 +4,12 @@
 #include "canvas.h"
 
 typedef struct YGL_Window {
-	#ifdef YGL_USE_SDL
+	#if defined(YGL_USE_SDL)
 		SDL_Window*   sdlWindow;
 		SDL_Renderer* sdlRenderer;
 		SDL_Texture*  sdlTexture;
+	#elif defined(YGL_USE_SDL1)
+		SDL_Surface* sdlSurface;
 	#endif
 
 	YGL_Canvas* canvas;

@@ -1,5 +1,3 @@
-#include <SDL2/SDL.h>
-#define YGL_USE_SDL
 #include <YGL.h>
 
 int main(void) {
@@ -11,7 +9,8 @@ int main(void) {
 	YGL_Window* window = YGL_CreateWindow("YGL", 640, 480);
 
 	if (window == NULL) {
-		fprintf(stderr, "Failed to make window\n");
+		fprintf(stderr, "Failed to make window, %s\n", YGL_GetError());
+		puts(SDL_GetError());
 		return 1;
 	}
 

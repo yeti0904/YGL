@@ -27,7 +27,7 @@ static YGL_Canvas* YGL_CreateCanvasFromSurface(SDL_Surface* surface) {
 YGL_Canvas* YGL_LoadBMP(const char* path) {
 	YGL_Canvas* ret = NULL;
 
-	#ifdef YGL_USE_SDL
+	#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
 		SDL_Surface* surface = SDL_LoadBMP(path);
 		
 		if (surface == NULL) {

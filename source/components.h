@@ -7,8 +7,10 @@
 #include <stdbool.h>
 #include <math.h>
 
-#ifdef YGL_USE_SDL
+#if defined(YGL_USE_SDL)
 	#include <SDL2/SDL.h>
+#elif defined(YGL_USE_SDL1)
+	#include <SDL/SDL.h>
 #endif
 
 #ifndef M_PI

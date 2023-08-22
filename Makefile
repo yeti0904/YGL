@@ -1,8 +1,17 @@
 SRC   = $(wildcard source/*.c)
 DEPS  = $(wildcard source/*.h)
 OBJ   = $(addsuffix .o,$(subst source/,bin/,$(basename ${SRC})))
-LIBS  = -lSDL2 -lm
-FLAGS = -std=c99 -Wall -Wextra -Werror -pedantic -g -DYGL_USE_SDL -Ofast
+LIBS  = -lm
+FLAGS = -std=c99 -Wall -Wextra -Werror -pedantic -g -Ofast
+
+ifeq ($(backend), SDL)
+	FLAGS += -DYGL_USE_SDL
+	LIBS  += -lSDL2
+endif
+ifeq ($(backend), SDL1)
+	FLAGS += -DYGL_USE_SDL1
+	LIBS  += -lSDL
+endif
 
 compile: ./bin $(OBJ) $(SRC) $(DEPS)
 	ar rcs libygl.a bin/*.o

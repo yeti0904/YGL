@@ -5,7 +5,7 @@ bool YGL_Init(void) {
 		return false;
 	}
 
-	#ifdef YGL_USE_SDL
+	#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
 		int res = SDL_Init(SDL_INIT_VIDEO);
 
 		if (res < 0) {
@@ -19,7 +19,7 @@ bool YGL_Init(void) {
 void YGL_Quit(void) {
 	YGL_FreeError();
 
-	#ifdef YGL_USE_SDL
+	#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
 		SDL_Quit();
 	#endif
 }
