@@ -65,8 +65,30 @@ void YGL_FreeWindow(YGL_Window* window) {
 	free(window);
 }
 
-void YGL_DrawWindow(YGL_Window* window) {
+bool YGL_DrawWindow(YGL_Window* window) {
 	#ifdef YGL_USE_SDL
+		// check if canvas size has changed
+		YGL_Vec2 textureSize;
+		SDL_QueryTexture(
+			window->sdlTexture, NULL, NULL, &textureSize.x, &textureSize.y
+		);
+
+		if (!YGL_CompareVec2(textureSize, window->canvas->size)) {
+			// create a new texture
+			SDL_DestroyTexture(window->sdlTexture);
+
+			window->sdlTexture = SDL_CreateTexture(
+				window->sdlRenderer, SDL_PIXELFORMAT_ABGR8888,
+				SDL_TEXTUREACCESS_STREAMING, window->canvas->size.x,
+				window->canvas->size.y
+			);
+
+			if (window->sdlTexture == NULL) {
+				YGL_SetError("Failed to create SDL texture");
+				return false;
+			}
+		}
+	
 		SDL_UpdateTexture(
 			window->sdlTexture, NULL, window->canvas->pixels,
 			window->canvas->size.x * 4
@@ -74,4 +96,6 @@ void YGL_DrawWindow(YGL_Window* window) {
 		SDL_RenderCopy(window->sdlRenderer, window->sdlTexture, NULL, NULL);
 		SDL_RenderPresent(window->sdlRenderer);
 	#endif
+
+	return true;
 }

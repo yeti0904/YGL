@@ -14,6 +14,24 @@ YGL_Colour YGL_PixelToColour(YGL_Pixel pixel) {
 	};
 }
 
+YGL_Colour YGL_InvertColour(YGL_Colour colour) {
+	return (YGL_Colour) {
+		255 - colour.r,
+		255 - colour.g,
+		255 - colour.b,
+		255
+	};
+}
+
+YGL_Colour YGL_AndColour(YGL_Colour colour1, YGL_Colour colour2) {
+	return (YGL_Colour) {
+		colour1.r & colour2.r,
+		colour1.g & colour2.g,
+		colour1.b & colour2.b,
+		255
+	};
+}
+
 YGL_Canvas* YGL_CreateCanvas(int w, int h) {
 	YGL_Canvas* ret = (YGL_Canvas*) malloc(sizeof(YGL_Canvas));
 
@@ -53,8 +71,6 @@ YGL_Pixel* YGL_GetCanvasPixel(YGL_Canvas* canvas, YGL_Vec2 pos) {
 	return &canvas->pixels[(pos.y * canvas->size.x) + pos.x];
 }
 
-// BROKEN!!!
-// TODO: fix
 bool YGL_ResizeCanvas(YGL_Canvas* canvas, YGL_Vec2 size) {
 	YGL_Pixel* pixels = (YGL_Pixel*) malloc(size.x * size.y * sizeof(YGL_Pixel));
 
@@ -79,6 +95,7 @@ bool YGL_ResizeCanvas(YGL_Canvas* canvas, YGL_Vec2 size) {
 
 	free(canvas->pixels);
 	canvas->pixels = pixels;
+	canvas->size   = size;
 
 	return true;
 }
@@ -123,7 +140,7 @@ void YGL_DrawLine(
 	YGL_Canvas* canvas, YGL_Vec2 start, YGL_Vec2 end, YGL_Colour colour
 ) {
 	YGL_Pixel pixel  = YGL_ColourToPixel(colour);
-	int       length = YGL_GetDistance(start, end);
+	int       length = YGL_GetDistance(start, end) + 10;
 
 	for (int i = 0; i < length; ++ i) {
 		float     t            = i == 0? 0.0 : (float) i / (float) length;
@@ -194,18 +211,4 @@ void YGL_BlitCanvas(
 			YGL_DrawRawPixel(canvas, (YGL_Vec2) {pos.x, pos.y}, pixel);
 		}
 	}
-}
-
-void YGL_DrawShape(
-	YGL_Canvas* canvas, YGL_Vec2* points, size_t n, YGL_Colour colour
-) {
-	if (n < 2) {
-		return;
-	}
-	
-	for (size_t i = 0; i < n - 1; ++ i) {
-		YGL_DrawLine(canvas, points[i], points[i + 1], colour);
-	}
-
-	YGL_DrawLine(canvas, points[0], points[n - 1], colour);
 }

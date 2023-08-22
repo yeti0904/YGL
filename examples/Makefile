@@ -1,7 +1,7 @@
 src  = $(wildcard ./*.c)
 prog = $(subst ./,bin/,$(basename $(src)))
 arg  = -g -Wall -pedantic -O3 -I../source
-lib  = ../libygl.a -lSDL2 -lm
+lib  = ../libygl.a -lSDL2 -lm -Ofast
 
 all: $(prog)
 

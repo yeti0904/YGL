@@ -15,6 +15,6 @@ typedef struct YGL_Window {
 
 YGL_Window* YGL_CreateWindow(const char* name, int w, int h);
 void        YGL_FreeWindow(YGL_Window* window);
-void        YGL_DrawWindow(YGL_Window* window);
+bool        YGL_DrawWindow(YGL_Window* window);
 
 #endif

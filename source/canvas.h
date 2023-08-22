@@ -1,8 +1,8 @@
 #ifndef YGL_CANVAS_H
 #define YGL_CANVAS_H
 
-#include "components.h"
 #include "types.h"
+#include "components.h"
 
 typedef struct YGL_Colour {
 	uint8_t r, g, b, a;
@@ -12,6 +12,8 @@ typedef uint32_t YGL_Pixel;
 
 YGL_Pixel  YGL_ColourToPixel(YGL_Colour colour);
 YGL_Colour YGL_PixelToColour(YGL_Pixel pixel);
+YGL_Colour YGL_InvertColour(YGL_Colour colour);
+YGL_Colour YGL_AndColour(YGL_Colour colour1, YGL_Colour colour2);
 
 typedef struct YGL_Canvas {
 	YGL_Pixel* pixels;
@@ -35,9 +37,6 @@ void YGL_DrawLine(
 );
 void YGL_BlitCanvas(
 	YGL_Canvas* canvas, YGL_Rect* psrc, YGL_Rect* pdest, YGL_Canvas* from
-);
-void YGL_DrawShape(
-	YGL_Canvas* canvas, YGL_Vec2* points, size_t n, YGL_Colour colour
 );
 
 #endif
