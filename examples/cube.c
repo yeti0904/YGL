@@ -1,5 +1,3 @@
-#include <SDL2/SDL.h>
-#define YGL_USE_SDL
 #include <YGL.h>
 
 int main(void) {
