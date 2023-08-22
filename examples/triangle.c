@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <YGL.h>
 
 int main(void) {
@@ -51,7 +52,8 @@ int main(void) {
 		
 		YGL_ClearCanvas(window->canvas, (YGL_Colour) {0, 50, 0, 255});
 
-		YGL_RotateShape(triangle, triangle->points[0], 1.0f);
+		YGL_FVec2 center = YGL_GetTriangleCenter(triangle);
+		YGL_RotateShape(triangle, center, 1.0f);
 		YGL_DrawShape(window->canvas, triangle, (YGL_Colour) {0, 255, 0, 255});
 
 		YGL_DrawWindow(window);
