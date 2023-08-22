@@ -58,7 +58,8 @@ int main(void) {
 
 	while (true) {
 		++ t;
-	
+
+		#ifdef YGL_USE_SDL
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
 			switch (e.type) {
@@ -83,6 +84,7 @@ int main(void) {
 				}
 			}
 		}
+		#endif
 		
 		YGL_ClearCanvas(window->canvas, (YGL_Colour) {0, 50, 0, 255});
 

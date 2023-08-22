@@ -19,6 +19,10 @@ void YGL_FreeError(void) {
 }
 
 void YGL_SetError(const char* str) {
+	if (error != NULL) {
+		free(error);
+	}
+
 	error = YGL_DupString(str);
 
 	if (error == NULL) {

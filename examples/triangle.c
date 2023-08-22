@@ -21,6 +21,7 @@ int main(void) {
 	int ticks = 0;
 
 	while (true) {
+		#ifdef YGL_USE_SDL
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
 			switch (e.type) {
@@ -46,6 +47,8 @@ int main(void) {
 				}
 			}
 		}
+		#endif
+		
 		YGL_ClearCanvas(window->canvas, (YGL_Colour) {0, 50, 0, 255});
 
 		YGL_RotateShape(triangle, triangle->points[0], 1.0f);

@@ -44,6 +44,7 @@ int main(void) {
 	int ticks = 0;
 
 	while (true) {
+		#ifdef YGL_USE_SDL
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
 			switch (e.type) {
@@ -108,6 +109,7 @@ int main(void) {
 				YGL_Spin3DShape(cube[i], camera2D, 1.0);
 			}
 		}
+		#endif
 		
 		YGL_ClearCanvas(window->canvas, (YGL_Colour) {0, 50, 0, 255});
 
