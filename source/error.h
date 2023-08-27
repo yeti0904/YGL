@@ -6,7 +6,7 @@
 typedef enum {
 	YGL_ERRORSOURCE_INTERNAL,
 	YGL_ERRORSOURCE_BACKEND,
-	YGL_ERRORSOURCE_LOADBMP
+	YGL_ERRORSOURCE_STB_IMAGE
 } YGL_ErrorSource;
 
 bool            YGL_InitError(void);

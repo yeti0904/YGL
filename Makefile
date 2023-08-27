@@ -3,7 +3,7 @@ DEPS     = $(wildcard source/*.h) $(wildcard source/**/*.h)
 OBJ      = $(addsuffix .o,$(subst source/,bin/,$(basename ${SRC})))
 BIN_DIRS = $(subst source/,bin/,$(sort $(dir $(wildcard source/*/))))
 LIBS     = -lm
-FLAGS    = -std=c99 -Wall -Wextra -Werror -pedantic -g -Ofast
+FLAGS    = -std=c99 -Wall -Wextra -Werror -pedantic -g -Ofast -I./lib
 
 ifeq ($(backend), SDL)
 	FLAGS += -DYGL_USE_SDL

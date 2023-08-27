@@ -1,6 +1,8 @@
 # YGL
 Yeti's Graphics Library
 
+Make sure to clone recursively
+
 ## Build
 ```
 make

@@ -1,46 +1,38 @@
 #include "image.h"
 #include "error.h"
 
-#if defined(YGL_USE_SDL) || (YGL_USE_SDL1)
-	static YGL_Canvas* YGL_CreateCanvasFromSurface(SDL_Surface* surface) {
-		YGL_Canvas* ret = YGL_CreateCanvas(surface->w, surface->h);
+#define STB_IMAGE_IMPLEMENTATION
+//#define STBI_FAILURE_USERMSG
+#include <stb/stb_image.h>
 
-		if (ret == NULL) {
-			return NULL;
-		}
+YGL_Canvas* YGL_LoadImage(const char* filename) {
+	YGL_Canvas* ret;
+	YGL_Vec2    size;
+	int         components;
 
-		int area = surface->w * surface->h;
+	uint8_t* data = stbi_load(filename, &size.x, &size.y, &components, 4);
 
-		for (int i = 0; i < area; ++ i) {
-			uint32_t pixel = ((uint32_t*) surface->pixels)[i];
-
-			int r = ((pixel & surface->format->Rmask) >> surface->format->Rshift);
-			int g = ((pixel & surface->format->Gmask) >> surface->format->Gshift);
-			int b = ((pixel & surface->format->Bmask) >> surface->format->Bshift);
-			int a = ((pixel & surface->format->Amask) >> surface->format->Ashift);
-
-			ret->pixels[i] = YGL_ColourToPixel((YGL_Colour) {r, g, b, a});
-		}
-
-		return ret;
+	if (data == NULL) {
+		YGL_SetError("stbi_load failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_STB_IMAGE);
+		return NULL;
 	}
 
-	YGL_Canvas* YGL_LoadBMP(const char* path) {
-		YGL_Canvas* ret = NULL;
+	ret = YGL_CreateCanvas(size.x, size.y);
 
-		#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
-			SDL_Surface* surface = SDL_LoadBMP(path);
-			
-			if (surface == NULL) {
-				YGL_SetError("Failed to create SDL surface");
-				YGL_SetErrorSource(YGL_ERRORSOURCE_BACKEND);
-				return NULL;
-			}
-
-			ret = YGL_CreateCanvasFromSurface(surface);
-			SDL_FreeSurface(surface);
-		#endif
-		
-		return ret;
+	if (ret == NULL) {
+		stbi_image_free(data);
+		return NULL;
 	}
-#endif
+
+	uint8_t* pixel = data;
+	for (int y = 0; y < size.y; ++ y) {
+		for (int x = 0; x < size.x; ++ x, pixel += 4) {
+			YGL_Colour colour = {pixel[0], pixel[1], pixel[2], pixel[3]};
+			YGL_DrawPixel(ret, (YGL_Vec2) {x, y}, colour);
+		}
+	}
+
+	stbi_image_free(data);
+	return ret;
+}

@@ -1,3 +1,4 @@
+#include <stb/stb_image.h>
 #include "util.h"
 #include "error.h"
 
@@ -61,8 +62,8 @@ void YGL_PrintError(void) {
 			source = "backend";
 			break;
 		}
-		case YGL_ERRORSOURCE_LOADBMP: {
-			source = "loadbmp";
+		case YGL_ERRORSOURCE_STB_IMAGE: {
+			source = "stb_image";
 			break;
 		}
 		default: {
@@ -75,11 +76,16 @@ void YGL_PrintError(void) {
 
 	switch (errorSource) {
 		case YGL_ERRORSOURCE_BACKEND: {
+			// TODO: call backend
 			#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
 				printf(" (%s)\n", SDL_GetError());
 			#else
 				printf(" (No backend)\n");
 			#endif
+			break;
+		}
+		case YGL_ERRORSOURCE_STB_IMAGE: {
+			printf(" (%s)\n", stbi_failure_reason());
 			break;
 		}
 		default: {
