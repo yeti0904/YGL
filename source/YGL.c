@@ -1,25 +1,25 @@
 #include "YGL.h"
+#include "backend.h"
 
 bool YGL_Init(void) {
 	if (!YGL_InitError()) {
 		return false;
 	}
+	
+	YGL_InitBackend();
+	YGL_Backend backend = YGL_GetBackend();
+	if (!backend.init()) {
+		YGL_SetError("Backend error");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_BACKEND);
+		return false;
+	}
 
-	#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
-		int res = SDL_Init(SDL_INIT_VIDEO);
-
-		if (res < 0) {
-			YGL_SetError("SDL error");
-		}
-
-		return res == 0;
-	#endif
+	return true;
 }
 
 void YGL_Quit(void) {
 	YGL_FreeError();
 
-	#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
-		SDL_Quit();
-	#endif
+	YGL_Backend backend = YGL_GetBackend();
+	backend.free();
 }

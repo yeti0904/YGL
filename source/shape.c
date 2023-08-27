@@ -6,6 +6,7 @@ YGL_Shape* YGL_CreateShape(size_t n) {
 
 	if (ret == NULL) {
 		YGL_SetError("malloc failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		return NULL;
 	}
 
@@ -13,6 +14,7 @@ YGL_Shape* YGL_CreateShape(size_t n) {
 
 	if (ret == NULL) {
 		YGL_SetError("malloc failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		return NULL;
 	}
 	
@@ -113,6 +115,7 @@ YGL_3DShape* YGL_Create3DShape(size_t n) {
 
 	if (ret == NULL) {
 		YGL_SetError("malloc failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		return NULL;
 	}
 
@@ -120,6 +123,7 @@ YGL_3DShape* YGL_Create3DShape(size_t n) {
 
 	if (ret == NULL) {
 		YGL_SetError("malloc failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		return NULL;
 	}
 	

@@ -3,6 +3,8 @@
 
 #include "canvas.h"
 
-YGL_Canvas* YGL_LoadBMP(const char* path);
+#if defined(YGL_USE_SDL) || (YGL_USE_SDL1)
+	YGL_Canvas* YGL_LoadBMP(const char* path);
+#endif
 
 #endif

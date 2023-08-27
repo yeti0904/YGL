@@ -1,11 +1,13 @@
 #ifndef YGL_COMPONENTS_H
 #define YGL_COMPONENTS_H
 
+#include <stdio.h>
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <math.h>
+#include <string.h>
 
 #if defined(YGL_USE_SDL)
 	#include <SDL2/SDL.h>

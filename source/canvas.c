@@ -37,6 +37,7 @@ YGL_Canvas* YGL_CreateCanvas(int w, int h) {
 
 	if (ret == NULL) {
 		YGL_SetError("malloc failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		return NULL;
 	}
 
@@ -45,6 +46,7 @@ YGL_Canvas* YGL_CreateCanvas(int w, int h) {
 
 	if (ret->pixels == NULL) {
 		YGL_SetError("malloc failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		free(ret);
 		return NULL;
 	}
@@ -65,6 +67,7 @@ YGL_Pixel* YGL_GetCanvasPixel(YGL_Canvas* canvas, YGL_Vec2 pos) {
 		(pos.y >= canvas->size.y)
 	) {
 		YGL_SetError("pixel out of bounds");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		return NULL;
 	}
 
@@ -76,6 +79,7 @@ bool YGL_ResizeCanvas(YGL_Canvas* canvas, YGL_Vec2 size) {
 
 	if (pixels == NULL) {
 		YGL_SetError("malloc failed");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
 		return false;
 	}
 
