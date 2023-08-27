@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <math.h>
 #include <string.h>
+#include <sys/param.h>
 
 #if defined(YGL_USE_SDL)
 	#include <SDL2/SDL.h>

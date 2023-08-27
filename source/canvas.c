@@ -165,6 +165,11 @@ void YGL_DrawLine(
 	YGL_Pixel pixel  = YGL_ColourToPixel(colour);
 	int       length = YGL_GetDistance(start, end) + 10;
 
+	start.x = MAX(start.x, 0);
+	start.y = MAX(start.y, 0);
+	end.x   = MIN(end.x,   canvas->size.x);
+	end.y   = MIN(end.y,   canvas->size.y);
+
 	for (int i = 0; i < length; ++ i) {
 		float     t            = i == 0? 0.0 : (float) i / (float) length;
 		YGL_FVec2 interpolated = YGL_LerpVec2(start, end, t);
