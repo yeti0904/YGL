@@ -1,3 +1,6 @@
+// Mandelbrot example
+// press space to save the image to mandelbrot.png
+
 #include <YGL.h>
 
 int t = 0;
@@ -67,6 +70,14 @@ int main(void) {
 					YGL_FreeWindow(window);
 					YGL_Quit();
 					return 0;
+				}
+				case SDL_KEYDOWN: {
+					if (e.key.keysym.scancode == SDL_SCANCODE_SPACE) {
+						if (!YGL_SaveImage("mandelbrot.png", window->canvas)) {
+							YGL_PrintError();
+						}
+					}
+					break;
 				}
 				case SDL_WINDOWEVENT: {
 					switch (e.window.event) {

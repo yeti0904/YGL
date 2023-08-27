@@ -1,4 +1,4 @@
-#include <stb/stb_image.h>
+#include "stb.h"
 #include "util.h"
 #include "error.h"
 #include "backend.h"
@@ -91,6 +91,7 @@ void YGL_PrintError(void) {
 			printf(" (%s)\n", stbi_failure_reason());
 			break;
 		}
+		// TODO: does stb_image_write have error stuff
 		default: {
 			putchar('\n');
 			break;

@@ -11,3 +11,13 @@ char* YGL_DupString(const char* str) {
 
 	return ret;
 }
+
+const char* YGL_GetExtension(const char* path) {
+	char* ret = strrchr(path, '.');
+
+	if (ret == NULL) {
+		return path + strlen(path); // empty string
+	}
+
+	return ret + 1;
+}
