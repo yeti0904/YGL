@@ -77,7 +77,6 @@ void YGL_PrintError(void) {
 
 	switch (errorSource) {
 		case YGL_ERRORSOURCE_BACKEND: {
-			// TODO: call backend
 			YGL_Backend backend = YGL_GetBackend();
 
 			if (backend.null) {

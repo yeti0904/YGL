@@ -127,6 +127,25 @@ void YGL_DrawRawPixel(YGL_Canvas* canvas, YGL_Vec2 pos, YGL_Pixel pixel) {
 		return;
 	}
 
+	uint8_t alpha = (pixel & 0xFF000000) >> 24;
+	if (alpha != 255) {
+		if (alpha == 0) {
+			return;
+		}
+
+		double t = ((double) alpha) / 255.0;
+
+		YGL_Colour old = YGL_PixelToColour(
+			canvas->pixels[(pos.y * canvas->size.x) + pos.x]
+		);
+		YGL_Colour colour = YGL_PixelToColour(pixel);
+		colour.r = YGL_Lerp(old.r, colour.r, t);
+		colour.g = YGL_Lerp(old.g, colour.g, t);
+		colour.b = YGL_Lerp(old.b, colour.b, t);
+
+		pixel = YGL_ColourToPixel(colour);
+	}
+
 	canvas->pixels[(pos.y * canvas->size.x) + pos.x] = pixel;
 }
 
