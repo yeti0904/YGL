@@ -13,6 +13,9 @@ ifeq ($(backend), SDL1)
 	FLAGS += -DYGL_USE_SDL1
 	LIBS  += -lSDL
 endif
+ifeq ($(backend), custom)
+	FLAGS += -DYGL_CUSTOM_BACKEND_COMPONENTS
+endif
 
 compile: ./bin $(BIN_DIRS) $(OBJ) $(SRC) $(DEPS)
 	ar rcs libygl.a bin/*.o bin/**/*.o

@@ -12,7 +12,19 @@ YGL_Window* YGL_CreateWindow(const char* name, int w, int h) {
 	}
 
 	YGL_Backend backend = YGL_GetBackend();
-	ret->windowBackend  = backend.initWindow(name, w, h);
+
+	if (backend.null) {
+		YGL_SetError("A backend is required to create a window");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
+		free(ret);
+		return NULL;
+	}
+	
+	ret->windowBackend = backend.initWindow(name, w, h);
+	if (ret->windowBackend.null) {
+		free(ret);
+		return NULL;
+	}
 
 	ret->canvas = YGL_CreateCanvas(w, h);
 
