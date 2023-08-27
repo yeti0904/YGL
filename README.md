@@ -8,6 +8,8 @@ make
 
 This will create a static library called libygl.a
 
+See info about parameters you can pass below (this is very important)
+
 ## Usage
 Using YGL requires you to pick a backend
 
@@ -17,7 +19,7 @@ Available backends
 
 In the YGL makefile and example makefile, you can select them by adding `backend=(backend here)` to the parameters to `make` (the examples only support SDL2 though)
 
-In your YGL project, choose the backend by defining the backend macro in your code or compile arguments, and then linking the backend you have chosen
+In your YGL project, link your chosen backend
 
 YGL can be used with no backend, programs will be mostly the same except you can't create/use windows
 
