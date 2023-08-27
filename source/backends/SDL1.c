@@ -84,6 +84,10 @@ static bool YGL_SDL1_DrawWindow(YGL_Canvas* canvas, YGL_BackendWindow* window) {
 	}
 }
 
+static char* YGL_SDL1_GetError(void) {
+	return (char*) SDL_GetError();
+}
+
 YGL_Backend YGL_CreateSDLBackend(void) {
 	YGL_Backend backend;
 
@@ -93,6 +97,7 @@ YGL_Backend YGL_CreateSDLBackend(void) {
 	backend.initWindow = YGL_SDL1_InitWindow;
 	backend.freeWindow = YGL_SDL1_FreeWindow;
 	backend.drawWindow = YGL_SDL1_DrawWindow;
+	backend.getError   = YGL_SDL1_GetError;
 
 	return backend;
 }

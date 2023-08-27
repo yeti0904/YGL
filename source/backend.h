@@ -27,6 +27,7 @@ typedef struct YGL_Backend {
 	YGL_FUNCTION_POINTER(
 		bool, drawWindow, YGL_Canvas*, YGL_BackendWindow*
 	);
+	YGL_FUNCTION_POINTER(char*, getError, void);
 } YGL_Backend;
 
 void        YGL_InitBackend(void);

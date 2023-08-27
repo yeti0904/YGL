@@ -1,6 +1,7 @@
 #include <stb/stb_image.h>
 #include "util.h"
 #include "error.h"
+#include "backend.h"
 
 // hi
 // i put this comment here in an attempt to make git push this file
@@ -77,11 +78,14 @@ void YGL_PrintError(void) {
 	switch (errorSource) {
 		case YGL_ERRORSOURCE_BACKEND: {
 			// TODO: call backend
-			#if defined(YGL_USE_SDL) || defined(YGL_USE_SDL1)
-				printf(" (%s)\n", SDL_GetError());
-			#else
-				printf(" (No backend)\n");
-			#endif
+			YGL_Backend backend = YGL_GetBackend();
+
+			if (backend.null) {
+				printf(" (No backend, could be a bug)\n");
+			}
+			else {
+				printf(" (%s)\n", backend.getError());
+			}
 			break;
 		}
 		case YGL_ERRORSOURCE_STB_IMAGE: {
