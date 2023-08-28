@@ -19,6 +19,14 @@ typedef struct YGL_FVec3 {
 	double x, y, z;
 } YGL_FVec3;
 
+typedef struct YGL_Rect {
+	int x, y, w, h;
+} YGL_Rect;
+
+typedef struct YGL_FRect {
+	double x, y, w, h;
+} YGL_FRect;
+
 int       YGL_GetDistance(YGL_Vec2 start, YGL_Vec2 end);
 float     YGL_Lerp(int start, int end, double t);
 YGL_FVec2 YGL_LerpVec2(YGL_Vec2 start, YGL_Vec2 end, double t);
@@ -29,9 +37,7 @@ YGL_FVec2 YGL_Vec2ToFloat(YGL_Vec2 vec2);
 YGL_Vec2  YGL_FVec2ToInt(YGL_FVec2 vec2);
 bool      YGL_CompareVec2(YGL_Vec2 v1, YGL_Vec2 v2);
 YGL_FVec2 YGL_RotatePoint(YGL_FVec2 point, YGL_FVec2 center, double angle);
+YGL_Rect  YGL_FRectToRect(YGL_FRect rect);
 
-typedef struct YGL_Rect {
-	int x, y, w, h;
-} YGL_Rect;
 
 #endif

@@ -72,3 +72,9 @@ YGL_FVec2 YGL_RotatePoint(YGL_FVec2 point, YGL_FVec2 center, double angle) {
 
 	return result;
 }
+
+YGL_Rect YGL_FRectToRect(YGL_FRect rect) {
+	return (YGL_Rect) {
+		(int) rect.x, (int) rect.y, (int) rect.w, (int) rect.h
+	};
+}
