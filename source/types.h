@@ -38,6 +38,7 @@ YGL_Vec2  YGL_FVec2ToInt(YGL_FVec2 vec2);
 bool      YGL_CompareVec2(YGL_Vec2 v1, YGL_Vec2 v2);
 YGL_FVec2 YGL_RotatePoint(YGL_FVec2 point, YGL_FVec2 center, double angle);
 YGL_Rect  YGL_FRectToRect(YGL_FRect rect);
-
+bool      YGL_FRectCollides(YGL_FRect rect1, YGL_FRect rect2);
+bool      YGL_RectCollides(YGL_Rect rect1, YGL_Rect rect2);
 
 #endif

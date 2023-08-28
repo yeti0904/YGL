@@ -78,3 +78,27 @@ YGL_Rect YGL_FRectToRect(YGL_FRect rect) {
 		(int) rect.x, (int) rect.y, (int) rect.w, (int) rect.h
 	};
 }
+
+bool YGL_FRectCollides(YGL_FRect rect1, YGL_FRect rect2) {
+	return
+		(
+			(rect1.x + rect1.w >= rect2.x) &&
+			(rect2.x + rect2.w >= rect1.x)
+		) &&
+		(
+			(rect1.y + rect1.h >= rect2.y) &&
+			(rect2.y + rect2.h >= rect1.y)
+		);
+}
+
+bool YGL_RectCollides(YGL_Rect rect1, YGL_Rect rect2) {
+	return
+		(
+			(rect1.x + rect1.w >= rect2.x) &&
+			(rect2.x + rect2.w >= rect1.x)
+		) &&
+		(
+			(rect1.y + rect1.h >= rect2.y) &&
+			(rect2.y + rect2.h >= rect1.y)
+		);
+}
