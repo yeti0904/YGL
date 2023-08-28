@@ -159,6 +159,25 @@ void YGL_FillRect(YGL_Canvas* canvas, YGL_Rect rect, YGL_Colour colour) {
 	}
 }
 
+void YGL_DrawRect(YGL_Canvas* canvas, YGL_Rect rect, YGL_Colour colour) {
+	YGL_DrawLine(
+		canvas, (YGL_Vec2) {rect.x, rect.y},
+		(YGL_Vec2) {rect.x + rect.w - 1, rect.y}, colour
+	);
+	YGL_DrawLine(
+		canvas, (YGL_Vec2) {rect.x, rect.y},
+		(YGL_Vec2) {rect.x, rect.y + rect.h - 1}, colour
+	);
+	YGL_DrawLine(
+		canvas, (YGL_Vec2) {rect.x + rect.w - 1, rect.y},
+		(YGL_Vec2) {rect.x + rect.w - 1, rect.y + rect.h - 1}, colour
+	);
+	YGL_DrawLine(
+		canvas, (YGL_Vec2) {rect.x, rect.y + rect.h - 1},
+		(YGL_Vec2) {rect.x + rect.w - 1, rect.y + rect.h - 1}, colour
+	);
+}
+
 void YGL_DrawLine(
 	YGL_Canvas* canvas, YGL_Vec2 start, YGL_Vec2 end, YGL_Colour colour
 ) {
