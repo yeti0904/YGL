@@ -40,5 +40,6 @@ YGL_FVec2 YGL_RotatePoint(YGL_FVec2 point, YGL_FVec2 center, double angle);
 YGL_Rect  YGL_FRectToRect(YGL_FRect rect);
 bool      YGL_FRectCollides(YGL_FRect rect1, YGL_FRect rect2);
 bool      YGL_RectCollides(YGL_Rect rect1, YGL_Rect rect2);
+double    YGL_ClampFloat(double start, double end, double value);
 
 #endif

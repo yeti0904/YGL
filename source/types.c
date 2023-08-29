@@ -102,3 +102,9 @@ bool YGL_RectCollides(YGL_Rect rect1, YGL_Rect rect2) {
 			(rect2.y + rect2.h >= rect1.y)
 		);
 }
+
+double YGL_ClampFloat(double start, double end, double value) {
+	// https://stackoverflow.com/a/16659263/12577005
+	const double t = value < start? start : value;
+	return t > end? end : t;
+}
