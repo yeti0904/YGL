@@ -32,6 +32,13 @@ YGL_Colour YGL_AndColour(YGL_Colour colour1, YGL_Colour colour2) {
 	};
 }
 
+int YGL_ColourDifference(YGL_Colour colour1, YGL_Colour colour2) {
+	uint8_t r = colour2.r - colour1.r;
+	uint8_t g = colour2.g - colour1.g;
+	uint8_t b = colour2.b - colour1.b;
+	return r * r + g * g + b * b;
+}
+
 YGL_Canvas* YGL_CreateCanvas(int w, int h) {
 	YGL_Canvas* ret = (YGL_Canvas*) malloc(sizeof(YGL_Canvas));
 
@@ -41,8 +48,9 @@ YGL_Canvas* YGL_CreateCanvas(int w, int h) {
 		return NULL;
 	}
 
-	ret->size   = (YGL_Vec2) {w, h};
-	ret->pixels = (YGL_Pixel*) malloc(w * h * sizeof(YGL_Pixel));
+	ret->size      = (YGL_Vec2) {w, h};
+	ret->pixels    = (YGL_Pixel*) malloc(w * h * sizeof(YGL_Pixel));
+	ret->ignoreRGB = false;
 
 	if (ret->pixels == NULL) {
 		YGL_SetError("malloc failed");
@@ -113,24 +121,26 @@ void YGL_ClearCanvas(YGL_Canvas* canvas, YGL_Colour colour) {
 	}
 }
 
-void YGL_DrawPixel(YGL_Canvas* canvas, YGL_Vec2 pos, YGL_Colour colour) {
-	YGL_DrawRawPixel(canvas, pos, YGL_ColourToPixel(colour));
+bool YGL_DrawPixel(YGL_Canvas* canvas, YGL_Vec2 pos, YGL_Colour colour) {
+	return YGL_DrawRawPixel(canvas, pos, YGL_ColourToPixel(colour));
 }
 
-void YGL_DrawRawPixel(YGL_Canvas* canvas, YGL_Vec2 pos, YGL_Pixel pixel) {
+bool YGL_DrawRawPixel(YGL_Canvas* canvas, YGL_Vec2 pos, YGL_Pixel pixel) {
 	if (
 		(pos.x < 0) ||
 		(pos.y < 0) ||
 		(pos.x >= canvas->size.x) ||
 		(pos.y >= canvas->size.y)
 	) {
-		return;
+		YGL_SetError("Pixel out of bounds");
+		YGL_SetErrorSource(YGL_ERRORSOURCE_INTERNAL);
+		return false;
 	}
 
 	uint8_t alpha = (pixel & 0xFF000000) >> 24;
-	if (alpha != 255) {
+	if (!canvas->ignoreRGB && (alpha != 255)) {
 		if (alpha == 0) {
-			return;
+			return true;
 		}
 
 		double t = ((double) alpha) / 255.0;
@@ -147,6 +157,7 @@ void YGL_DrawRawPixel(YGL_Canvas* canvas, YGL_Vec2 pos, YGL_Pixel pixel) {
 	}
 
 	canvas->pixels[(pos.y * canvas->size.x) + pos.x] = pixel;
+	return true;
 }
 
 void YGL_FillRect(YGL_Canvas* canvas, YGL_Rect rect, YGL_Colour colour) {

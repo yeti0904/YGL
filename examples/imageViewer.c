@@ -26,6 +26,15 @@ int main(int argc, char** argv) {
 		return 1;
 	}
 
+	YGL_Palette* palette = YGL_CreatePalette(4);
+	palette->colours[0] = (YGL_Colour) {0,   0,   0,   255};
+	palette->colours[1] = (YGL_Colour) {255, 85,  255, 255};
+	palette->colours[2] = (YGL_Colour) {85,  255, 255, 255};
+	palette->colours[3] = (YGL_Colour) {255, 255, 255, 255};
+
+	YGL_RGBCanvasToPaletted(image, palette);
+	YGL_PalettedCanvasToRGB(image, palette);
+
 	while (true) {
 		SDL_Event e;
 		while (SDL_PollEvent(&e)) {
