@@ -41,5 +41,8 @@ void YGL_DrawLine(
 void YGL_BlitCanvas(
 	YGL_Canvas* canvas, YGL_Rect* psrc, YGL_Rect* pdest, YGL_Canvas* from
 );
+int         YGL_CanvasArea(YGL_Canvas* canvas);
+YGL_Canvas* YGL_CloneCanvas(YGL_Canvas* canvas);
+YGL_Canvas* YGL_CropCanvas(YGL_Canvas* canvas, YGL_Rect crop);
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef YGL_YGL_H
 #define YGL_YGL_H
 
+#include "math.h"
 #include "error.h"
 #include "image.h"
 #include "shape.h"

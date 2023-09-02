@@ -153,8 +153,6 @@ void YGL_Draw3DPlane(YGL_Canvas* canvas, YGL_3DShape* shape, YGL_Colour colour) 
 		if (z == 0) {
 			z = 0.0001;
 		}
-
-		z /= 10.0f;
 		
 		point.x  = shape->points[i].x / z;
 		point.y  = shape->points[i].y / z;

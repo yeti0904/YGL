@@ -270,3 +270,31 @@ void YGL_BlitCanvas(
 		}
 	}
 }
+
+int YGL_CanvasArea(YGL_Canvas* canvas) {
+	return canvas->size.x * canvas->size.y;
+}
+
+YGL_Canvas* YGL_CloneCanvas(YGL_Canvas* canvas) {
+	YGL_Canvas* ret = YGL_CreateCanvas(canvas->size.x, canvas->size.y);
+
+	if (ret == NULL) {
+		return NULL;
+	}
+
+	memcpy(
+		ret->pixels, canvas->pixels, YGL_CanvasArea(canvas) * sizeof(YGL_Pixel)
+	);
+	return ret;
+}
+
+YGL_Canvas* YGL_CropCanvas(YGL_Canvas* canvas, YGL_Rect crop) {
+	YGL_Canvas* ret = YGL_CreateCanvas(crop.w, crop.h);
+
+	if (ret == NULL) {
+		return NULL;
+	}
+
+	YGL_BlitCanvas(ret, &crop, NULL, canvas);
+	return ret;
+}

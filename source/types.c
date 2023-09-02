@@ -9,23 +9,11 @@ int YGL_GetDistance(YGL_Vec2 start, YGL_Vec2 end) {
 	return (int) sqrtf(powf(difference.x, 2) + powf(difference.y, 2));
 }
 
-float YGL_Lerp(int start, int end, double t) {
-	return (int) ((double) start + t * ((double) end - (double) start));
-}
-
 YGL_FVec2 YGL_LerpVec2(YGL_Vec2 start, YGL_Vec2 end, double t) {
 	return (YGL_FVec2) {
 		YGL_Lerp(start.x, end.x, t),
 		YGL_Lerp(start.y, end.y, t)
 	};
-}
-
-double YGL_RadiansToDegrees(double rad) {
-	return rad * 180 / M_PI;
-}
-
-double YGL_DegreesToRadians(double deg) {
-	return deg * (M_PI / 180);
 }
 
 double YGL_GetAngle(YGL_Vec2 p1, YGL_Vec2 p2) {
@@ -101,10 +89,4 @@ bool YGL_RectCollides(YGL_Rect rect1, YGL_Rect rect2) {
 			(rect1.y + rect1.h >= rect2.y) &&
 			(rect2.y + rect2.h >= rect1.y)
 		);
-}
-
-double YGL_ClampFloat(double start, double end, double value) {
-	// https://stackoverflow.com/a/16659263/12577005
-	const double t = value < start? start : value;
-	return t > end? end : t;
 }

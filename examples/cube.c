@@ -16,28 +16,28 @@ int main(void) {
 	YGL_3DShape* cube[4];
 
 	cube[0]            = YGL_Create3DShape(4);
-	cube[0]->points[0] = (YGL_FVec3) {-10, -10, 5}; // bottom left
-	cube[0]->points[1] = (YGL_FVec3) {-10,  10, 5}; // top left
-	cube[0]->points[2] = (YGL_FVec3) { 10,  10, 5}; // top right
-	cube[0]->points[3] = (YGL_FVec3) { 10, -10, 5}; // bottom right
+	cube[0]->points[0] = (YGL_FVec3) {-1, -1, 0.5}; // bottom left
+	cube[0]->points[1] = (YGL_FVec3) {-1,  1, 0.5}; // top left
+	cube[0]->points[2] = (YGL_FVec3) { 1,  1, 0.5}; // top right
+	cube[0]->points[3] = (YGL_FVec3) { 1, -1, 0.5}; // bottom right
 
 	cube[1]            = YGL_Create3DShape(4);
-	cube[1]->points[0] = (YGL_FVec3) {-10, -10, 10}; // bottom left
-	cube[1]->points[1] = (YGL_FVec3) {-10,  10, 10}; // top left
-	cube[1]->points[2] = (YGL_FVec3) { 10,  10, 10}; // top right
-	cube[1]->points[3] = (YGL_FVec3) { 10, -10, 10}; // bottom right
+	cube[1]->points[0] = (YGL_FVec3) {-1, -1, 1}; // bottom left
+	cube[1]->points[1] = (YGL_FVec3) {-1,  1, 1}; // top left
+	cube[1]->points[2] = (YGL_FVec3) { 1,  1, 1}; // top right
+	cube[1]->points[3] = (YGL_FVec3) { 1, -1, 1}; // bottom right
 
 	cube[2]            = YGL_Create3DShape(4);
-	cube[2]->points[0] = (YGL_FVec3) {-10, -10,  5}; // bottom left
-	cube[2]->points[1] = (YGL_FVec3) {-10,  10,  5}; // top left
-	cube[2]->points[2] = (YGL_FVec3) {-10,  10, 10}; // top right
-	cube[2]->points[3] = (YGL_FVec3) {-10, -10, 10}; // bottom right
+	cube[2]->points[0] = (YGL_FVec3) {-1, -1, 0.5}; // bottom left
+	cube[2]->points[1] = (YGL_FVec3) {-1,  1, 0.5}; // top left
+	cube[2]->points[2] = (YGL_FVec3) {-1,  1, 1}; // top right
+	cube[2]->points[3] = (YGL_FVec3) {-1, -1, 1}; // bottom right
 
 	cube[3]            = YGL_Create3DShape(4);
-	cube[3]->points[0] = (YGL_FVec3) { 10, -10, 10}; // bottom left
-	cube[3]->points[1] = (YGL_FVec3) { 10,  10, 10}; // top left
-	cube[3]->points[2] = (YGL_FVec3) { 10,  10,  5}; // top right
-	cube[3]->points[3] = (YGL_FVec3) { 10, -10,  5}; // bottom right
+	cube[3]->points[0] = (YGL_FVec3) {1, -1, 1}; // bottom left
+	cube[3]->points[1] = (YGL_FVec3) {1,  1, 1}; // top left
+	cube[3]->points[2] = (YGL_FVec3) {1,  1, 0.5}; // top right
+	cube[3]->points[3] = (YGL_FVec3) {1, -1, 0.5}; // bottom right
 
 	YGL_FVec3 camera = {0.0, 0.0, 0.0};
 
@@ -73,27 +73,29 @@ int main(void) {
 		++ ticks;
 		const uint8_t* keys = SDL_GetKeyboardState(NULL);
 
+		double moveSpeed = 0.01;
+
 		if (keys[SDL_SCANCODE_W]) {
 			for (size_t i = 0; i < sizeof(cube) / sizeof(void*); ++ i) {
-				YGL_Move3DShape(cube[i], (YGL_FVec3) {0, 0, -1});
+				YGL_Move3DShape(cube[i], (YGL_FVec3) {0, 0, -moveSpeed});
 			}
 			camera.z -= 1;
 		}
 		if (keys[SDL_SCANCODE_A]) {
 			for (size_t i = 0; i < sizeof(cube) / sizeof(void*); ++ i) {
-				YGL_Move3DShape(cube[i], (YGL_FVec3) {1, 0, 0});
+				YGL_Move3DShape(cube[i], (YGL_FVec3) {moveSpeed, 0, 0});
 			}
 			camera.x += 1;
 		}
 		if (keys[SDL_SCANCODE_S]) {
 			for (size_t i = 0; i < sizeof(cube) / sizeof(void*); ++ i) {
-				YGL_Move3DShape(cube[i], (YGL_FVec3) {0, 0, 1});
+				YGL_Move3DShape(cube[i], (YGL_FVec3) {0, 0, moveSpeed});
 			}
 			camera.z += 1;
 		}
 		if (keys[SDL_SCANCODE_D]) {
 			for (size_t i = 0; i < sizeof(cube) / sizeof(void*); ++ i) {
-				YGL_Move3DShape(cube[i], (YGL_FVec3) {-1, 0, 0});
+				YGL_Move3DShape(cube[i], (YGL_FVec3) {-moveSpeed, 0, 0});
 			}
 			camera.x -= 1;
 		}
