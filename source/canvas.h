@@ -38,6 +38,12 @@ void YGL_FillRect(YGL_Canvas* canvas, YGL_Rect rect, YGL_Colour colour);
 void YGL_DrawLine(
 	YGL_Canvas* canvas, YGL_Vec2 start, YGL_Vec2 end, YGL_Colour colour
 );
+void YGL_DrawVLine(
+	YGL_Canvas* canvas, YGL_Vec2 start, int length, YGL_Colour colour
+);
+void YGL_DrawHLine(
+	YGL_Canvas* canvas, YGL_Vec2 start, int length, YGL_Colour colour
+);
 void YGL_BlitCanvas(
 	YGL_Canvas* canvas, YGL_Rect* psrc, YGL_Rect* pdest, YGL_Canvas* from
 );
