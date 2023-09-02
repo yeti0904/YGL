@@ -193,7 +193,7 @@ void YGL_DrawLine(
 	YGL_Canvas* canvas, YGL_Vec2 start, YGL_Vec2 end, YGL_Colour colour
 ) {
 	YGL_Pixel pixel  = YGL_ColourToPixel(colour);
-	int       length = YGL_GetDistance(start, end) + 10;
+	int       length = YGL_GetDistance(start, end);
 
 	start.x = MAX(start.x, 0);
 	start.y = MAX(start.y, 0);
