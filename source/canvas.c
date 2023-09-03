@@ -215,7 +215,10 @@ void YGL_DrawLine(
 void YGL_DrawVLine(
 	YGL_Canvas* canvas, YGL_Vec2 start, int length, YGL_Colour colour
 ) {
-	YGL_Pixel pixel = YGL_ColourToPixel(colour);
+	YGL_Pixel pixel  = YGL_ColourToPixel(colour);
+	start.y          = MAX(start.y, 0);
+	length           = MIN(canvas->size.y, start.y + length);
+	length          -= start.y;
 	
 	for (int y = 0; y < length; ++ y) {
 		YGL_Vec2 point = {
@@ -228,7 +231,10 @@ void YGL_DrawVLine(
 void YGL_DrawHLine(
 	YGL_Canvas* canvas, YGL_Vec2 start, int length, YGL_Colour colour
 ) {
-	YGL_Pixel pixel = YGL_ColourToPixel(colour);
+	YGL_Pixel pixel  = YGL_ColourToPixel(colour);
+	start.x          = MAX(start.x, 0);
+	length           = MIN(canvas->size.x, start.x + length);
+	length          -= start.x;
 	
 	for (int x = 0; x < length; ++ x) {
 		YGL_Vec2 point = {
