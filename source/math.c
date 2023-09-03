@@ -17,3 +17,11 @@ double YGL_ClampFloat(double start, double end, double value) {
 	const double t = value < start? start : value;
 	return t > end? end : t;
 }
+
+double YGL_CosDeg(double deg) {
+	return cos(YGL_DegreesToRadians(deg));
+}
+
+double YGL_SinDeg(double deg) {
+	return sin(YGL_DegreesToRadians(deg));
+}
