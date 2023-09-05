@@ -31,6 +31,7 @@ typedef struct YGL_FRect {
 int       YGL_GetDistance(YGL_Vec2 start, YGL_Vec2 end);
 YGL_FVec2 YGL_LerpVec2(YGL_Vec2 start, YGL_Vec2 end, double t);
 double    YGL_GetAngle(YGL_Vec2 p1, YGL_Vec2 p2);
+double    YGL_GetFAngle(YGL_FVec2 p1, YGL_FVec2 p2);
 YGL_FVec2 YGL_Vec2ToFloat(YGL_Vec2 vec2);
 YGL_Vec2  YGL_FVec2ToInt(YGL_FVec2 vec2);
 bool      YGL_CompareVec2(YGL_Vec2 v1, YGL_Vec2 v2);

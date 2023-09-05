@@ -17,7 +17,13 @@ YGL_FVec2 YGL_LerpVec2(YGL_Vec2 start, YGL_Vec2 end, double t) {
 }
 
 double YGL_GetAngle(YGL_Vec2 p1, YGL_Vec2 p2) {
-	float angle = atan2(p1.y - p2.y, p1.x - p2.x);
+	double angle = atan2(p1.y - p2.y, p1.x - p2.x);
+
+	return YGL_RadiansToDegrees(angle);
+}
+
+double YGL_GetFAngle(YGL_FVec2 p1, YGL_FVec2 p2) {
+	double angle = atan2(p1.y - p2.y, p1.x - p2.x);
 
 	return YGL_RadiansToDegrees(angle);
 }
