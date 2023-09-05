@@ -29,6 +29,7 @@ typedef struct YGL_FRect {
 } YGL_FRect;
 
 int       YGL_GetDistance(YGL_Vec2 start, YGL_Vec2 end);
+double    YGL_GetFDistance(YGL_FVec2 start, YGL_FVec2 end);
 YGL_FVec2 YGL_LerpVec2(YGL_Vec2 start, YGL_Vec2 end, double t);
 double    YGL_GetAngle(YGL_Vec2 p1, YGL_Vec2 p2);
 double    YGL_GetFAngle(YGL_FVec2 p1, YGL_FVec2 p2);

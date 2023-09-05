@@ -9,6 +9,14 @@ int YGL_GetDistance(YGL_Vec2 start, YGL_Vec2 end) {
 	return (int) sqrtf(powf(difference.x, 2) + powf(difference.y, 2));
 }
 
+double YGL_GetFDistance(YGL_FVec2 start, YGL_FVec2 end) {
+	YGL_FVec2 difference = (YGL_FVec2) {
+		fabs(start.x - end.x), fabs(start.y - end.y)
+	};
+
+	return sqrtf(powf(difference.x, 2.0) + powf(difference.y, 2.0));
+}
+
 YGL_FVec2 YGL_LerpVec2(YGL_Vec2 start, YGL_Vec2 end, double t) {
 	return (YGL_FVec2) {
 		YGL_Lerp(start.x, end.x, t),
